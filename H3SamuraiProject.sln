@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H3SamuraiProject.API", "H3SamuraiProject.API\H3SamuraiProject.API.csproj", "{0C785D91-1E50-4D0E-986B-80D8434BD8FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H3SamuraiProject.Repo", "H3SamuraiProject.Repo\H3SamuraiProject.Repo.csproj", "{A71C4A9B-B6DF-4DD5-979C-E42CC3E97587}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C785D91-1E50-4D0E-986B-80D8434BD8FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C785D91-1E50-4D0E-986B-80D8434BD8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C785D91-1E50-4D0E-986B-80D8434BD8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C785D91-1E50-4D0E-986B-80D8434BD8FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A71C4A9B-B6DF-4DD5-979C-E42CC3E97587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A71C4A9B-B6DF-4DD5-979C-E42CC3E97587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A71C4A9B-B6DF-4DD5-979C-E42CC3E97587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A71C4A9B-B6DF-4DD5-979C-E42CC3E97587}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5FCF38EF-A379-4BED-964A-4A3857C8A2F5}
+	EndGlobalSection
+EndGlobal
