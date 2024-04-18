@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace H3SamuraiProject.Repo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240417144511_seed1")]
-    partial class seed1
+    [Migration("20240418071503_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

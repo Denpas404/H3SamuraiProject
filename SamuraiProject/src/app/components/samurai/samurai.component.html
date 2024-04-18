@@ -1,0 +1,40 @@
+<p>samurai works!</p>
+
+<Button (click)="GetAllFromApi()">Get all</Button>
+<Button (click)="ShowList()">Show list</Button>
+
+<!-- <ul *ngFor="let samurai of SamuraiList">
+    <li>
+      ID: {{ samurai.Id }}
+    <li>
+      {{ samurai.Name }}
+    </li>
+    <li>
+      {{ samurai.Description }}
+    </li>
+    <li>{{ samurai.Age }}</li>
+</ul> -->
+
+<!-- <ol *ngFor="let samurai of SamuraiList">
+    <li> </li>
+    <ul>
+      <li>{{ samurai.Name }}</li>
+      <li>{{ samurai.Description }}</li>
+      <li>{{ samurai.Age }}</li>
+    </ul>
+</ol> -->
+
+  <div *ngIf="showSamuraiList">
+    <ul *ngFor="let samurai of SamuraiList">
+      <li>
+          {{ samurai.id}}
+      <li>
+        {{ samurai.name }}
+      </li>
+      <li>
+        {{ samurai.description }}
+      </li>
+      <li>{{ samurai.age }}</li>
+      <li>{{ samurai.horse?.name }}</li>
+  </ul>
+  </div>

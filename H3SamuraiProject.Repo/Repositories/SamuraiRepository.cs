@@ -25,7 +25,7 @@ namespace H3SamuraiProject.Repo.Repositories
 
         public ICollection<Samurai> GetAllSamurais()
         {
-            return _context.Samurais.OrderBy(S => S.Name).ToList();
+            return _context.Samurais.Include(s => s.Horse).OrderBy(S => S.Name).ToList();
         }
 
         public Samurai GetSamuraiById(int id)

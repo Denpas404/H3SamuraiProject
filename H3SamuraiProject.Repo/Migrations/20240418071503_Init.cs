@@ -2,6 +2,8 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace H3SamuraiProject.Repo.Migrations
 {
     /// <inheritdoc />
@@ -43,6 +45,24 @@ namespace H3SamuraiProject.Repo.Migrations
                         principalTable: "Horses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Horses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Red Hare" },
+                    { 2, "ShadowFax" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Samurais",
+                columns: new[] { "Id", "Age", "Description", "HorseId", "Name" },
+                values: new object[,]
+                {
+                    { 1, 25, "A samurai warrior who has been sent to the future by an evil demon named Aku.", 1, "Samurai Jack" },
+                    { 2, 15, "Just another guy with sword.", 2, "DarkOne" }
                 });
 
             migrationBuilder.CreateIndex(
