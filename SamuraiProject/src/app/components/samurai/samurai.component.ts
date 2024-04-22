@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Samurai } from '../../Models/Samurai'; //import the Samurai class
 import { SamuraiService } from '../../Services/samurai.service';
+import { GenericService } from '../../Services/generic.service';
 
 @Component({
   selector: 'app-samurai',
@@ -13,19 +14,17 @@ export class SamuraiComponent {
   SamuraiList: Samurai[] = []; //create an array of Samurai objects
   showSamuraiList: boolean = false; //create a boolean variable to show or hide the SamuraiList
 
-  constructor(private SamuraiService: SamuraiService) {}
+  constructor(private GenericService: GenericService<SamuraiService>) {}
 
   ngOnInit() {
     this.GetAllFromApi(); //call the GetAllFromApi method
   }
 
    GetAllFromApi() : void{
-    this.SamuraiService.getAllFromApi().subscribe((data: Samurai[]) => {
-      data.forEach((samurai: Samurai) => {
-        this.SamuraiList.push(samurai);
+    this.GenericService.getAllFromApi('samurai').subscribe((data: any[]) => {
+     this.SamuraiList = data;
       });
-      console.log(this.SamuraiList);
-    });
+
   }
 
   ShowList() : void{
