@@ -9,12 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    SamuraiComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SamuraiComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
