@@ -35,7 +35,7 @@ export class SamuraiComponent {
   ngOnInit() {
     //this.GetAllFromApi(); //call the GetAllFromApi method
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(4)]], // Minimum length validation
+      name: ['', [Validators.required, Validators.minLength(4), Validators.pattern(/^\S+$/)]],
       description: ['', Validators.required],
       age: ['', Validators.required],
     });

@@ -1,0 +1,29 @@
+form{
+  width: 50%;
+}
+
+.columnContainer{
+  display: flex;
+  flex-direction: row  ;
+}
+
+.columnOne{
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.columnTwo{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.buttonContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  margin-top: 10px;
+}
+
