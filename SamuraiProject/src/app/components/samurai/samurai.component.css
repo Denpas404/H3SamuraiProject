@@ -1,5 +1,10 @@
+h3{
+  margin: 30px 10px;
+}
+
 form{
   width: 50%;
+  margin-left: 10px;
 }
 
 .columnContainer{
@@ -25,4 +30,13 @@ form{
   justify-content: flex-end;
   margin-top: 10px;
 }
+
+button{
+  margin-left: 10px;
+}
+
+.hrLine{
+  margin: 30px 0;
+}
+
 

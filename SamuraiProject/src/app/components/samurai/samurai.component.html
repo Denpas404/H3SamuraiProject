@@ -1,8 +1,9 @@
-<p>samurai works!</p>
+<h3>Samurai works!</h3>
 
 <Button (click)="GetAllFromApi()">Get all</Button>
 <Button (click)="ShowList()">Show list</Button>
-<button (click)="AddSamuraiToApi()">Add</button>
+<button (click)="AddSamuraiToApi()" disabled>Add</button>
+<button (click)="flemmingWeirdFunction()">Flemming</button>
 
 <div *ngIf="showSamuraiList">
   <ul *ngFor="let samurai of SamuraiList">
@@ -19,10 +20,9 @@
   </ul>
 </div>
 
-<br>
-<br>
-<hr>
-<br>
+<div class="hrLine">
+  <hr>
+</div>
 
 <div>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -32,16 +32,14 @@
         <label for="">Description: </label>
         <label for="">Age: </label>
       </div>
-
       <div class="columnTwo">
-        <input type="text" id="name" name="name" class="form-control" formControlName="name" placeholder="Name"
-          required />
-        <div
-          *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)"
-          class="alert alert-danger">
-          <div *ngIf="registerForm.get('name')?.errors">Name is required.</div>
-          <div *ngIf="registerForm.get('name')?.errors">Name must be at least 4 characters long.</div>
-          <div *ngIf="registerForm.get('name')?.errors">Name can not contain whitespace.</div>
+        <div class="columnTwo">
+          <input type="text" id="name" name="name" class="form-control" formControlName="name" placeholder="Name"
+            required />
+          <div
+            *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)">
+            <div *ngIf="registerForm.get('name')?.errors">{{ registerForm.get('name')?.errors }}</div>
+          </div>
         </div>
         <input type="text" formControlName="description" placeholder="Description">
         <input type="number" formControlName="age" placeholder="Age">
@@ -50,6 +48,5 @@
     <div class="buttonContainer">
       <button type="submit">Add</button>
     </div>
-
   </form>
 </div>

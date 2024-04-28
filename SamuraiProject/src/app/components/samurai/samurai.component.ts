@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { Samurai } from '../../Models/Samurai'; //import the Samurai class
+import { Samurai } from '../../Models/Samurai';
 import { SamuraiService } from '../../Services/samurai.service';
 import { GenericService } from '../../Services/generic.service';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -14,7 +13,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-samurai',
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, ],
   standalone: true,
   templateUrl: './samurai.component.html',
   styleUrl: './samurai.component.css',
@@ -24,8 +23,12 @@ export class SamuraiComponent {
   SamuraiList: Samurai[] = []; //create an array of Samurai objects
   showSamuraiList: boolean = false; //create a boolean variable to show or hide the SamuraiList
 
-      registerForm!: FormGroup;
+  registerForm!: FormGroup;
   submitted = false;
+
+  temp: any = 'CanYouTest';
+  name: string = 'kanBan';
+  adr: any = 'Falkevej 45';
 
   constructor(
     private GenericService: GenericService<Samurai>,
@@ -33,35 +36,22 @@ export class SamuraiComponent {
   ) {}
 
   ngOnInit() {
-    //this.GetAllFromApi(); //call the GetAllFromApi method
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(4), Validators.pattern(/^\S+$/)]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.pattern(/^\S+$/),
+        ],
+      ],
       description: ['', Validators.required],
       age: ['', Validators.required],
     });
   }
 
-  GetAllFromApi(): void {
-    this.GenericService.getAllFromApi('samurai').subscribe((data: any[]) => {
-      this.SamuraiList = data;
-    });
-  }
-
-  ShowList(): void {
-    this.showSamuraiList = !this.showSamuraiList;
-  }
-
-  AddSamuraiToApi(): void {
-      this.GenericService.create(this.samurai, 'samurai').subscribe(
-      (data: Samurai) => {
-        this.SamuraiList.push(data);
-        console.log(data);
-      }
-    );
-  }
 
 
-  //button in the form
   onSubmit(): void {
     this.submitted = true;
     if (this.registerForm.invalid) {
@@ -77,5 +67,45 @@ export class SamuraiComponent {
     this.registerForm.reset();
 
     this.submitted = false;
+  }
+
+  GetAllFromApi(): void {
+    this.GenericService.getAllFromApi('samurai').subscribe((data: any[]) => {
+      this.SamuraiList = data;
+    });
+  }
+
+  ShowList(): void {
+    this.showSamuraiList = !this.showSamuraiList;
+  }
+
+  AddSamuraiToApi(): void {
+    this.GenericService.create(this.samurai, 'samurai').subscribe(
+      (data: Samurai) => {
+        this.SamuraiList.push(data);
+        console.log(data);
+      }
+    );
+  }
+
+  flemmingWeirdFunction() {
+    let newTemp = this.temp[0] + this.temp[1] + this.temp[6];
+    console.log(newTemp);
+
+    let newName = this.name.substring(0, 3) + this.name.substring(3, 7);
+    console.log(newName);
+
+    let newAdr = '';
+
+    //falkevej 45
+    for (let i = 1; i < this.adr.length + 1; i++) {
+      if (this.adr[i - 1] === ' ') {
+        newAdr += this.adr[i];
+      }
+      if (i % 3 == 0) {
+        newAdr += this.adr[i - 1];
+      }
+    }
+    console.log(newAdr);
   }
 }

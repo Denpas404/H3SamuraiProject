@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Samurai } from '../Models/Samurai';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class GenericService<Tmodel> {
   url: string = environment.apiUrl;
+  testbool : boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +35,7 @@ export class GenericService<Tmodel> {
 
   create(model: Tmodel, choice: string): Observable<Tmodel> {
 
-    return this.http.post<Tmodel>(this.url + '/' + choice, model);
+    return this.http.post<Tmodel>(this.url + '/' + choice, model, httpOptions);
 
   }
 }
