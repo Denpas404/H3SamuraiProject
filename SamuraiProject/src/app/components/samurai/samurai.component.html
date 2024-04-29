@@ -36,9 +36,9 @@
         <div class="columnTwo">
           <input type="text" id="name" name="name" class="form-control" formControlName="name" placeholder="Name"
             required />
-          <div
+          <div class="error"
             *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)">
-            <div *ngIf="registerForm.get('name')?.errors">{{ registerForm.get('name')?.errors }}</div>
+            <div *ngIf="registerForm.get('name')?.errors">{{ registerForm.get('name')?.errors | samuraiErrors }}</div>
           </div>
         </div>
         <input type="text" formControlName="description" placeholder="Description">

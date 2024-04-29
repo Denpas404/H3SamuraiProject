@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Samurai } from '../../Models/Samurai';
-import { SamuraiService } from '../../Services/samurai.service';
 import { GenericService } from '../../Services/generic.service';
 import {
   FormBuilder,
@@ -10,13 +9,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SamuraiErrorsPipe } from "./pipe/SamuraiErrors.pipe";
 
 @Component({
-  selector: 'app-samurai',
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, ],
-  standalone: true,
-  templateUrl: './samurai.component.html',
-  styleUrl: './samurai.component.css',
+    selector: 'app-samurai',
+    standalone: true,
+    templateUrl: './samurai.component.html',
+    styleUrl: './samurai.component.css',
+    imports: [ReactiveFormsModule, CommonModule, FormsModule, SamuraiErrorsPipe]
 })
 export class SamuraiComponent {
   samurai: Samurai = new Samurai(); //create an instance of the Samurai class
@@ -30,6 +30,7 @@ export class SamuraiComponent {
   name: string = 'kanBan';
   adr: any = 'Falkevej 45';
 
+
   constructor(
     private GenericService: GenericService<Samurai>,
     private fb: FormBuilder
@@ -37,16 +38,18 @@ export class SamuraiComponent {
 
   ngOnInit() {
     this.registerForm = this.fb.group({
+      updateOn: "blur",
       name: [
         '',
         [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.pattern(/^\S+$/),
-        ],
-      ],
-      description: ['', Validators.required],
-      age: ['', Validators.required],
+          Validators.required, //required
+          Validators.minLength(4), //min length 4
+          Validators.pattern(/^\S.*$/),
+          Validators.pattern(/^.*\S$/),
+          ],
+          ],
+          description: ['', Validators.required], //required
+      age: ['', Validators.required],     //required
     });
   }
 

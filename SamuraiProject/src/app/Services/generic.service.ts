@@ -21,7 +21,6 @@ export class GenericService<Tmodel> {
   /**
    * Retrieves all data from the API.
    * Return An Observable that emits an array of Tmodel objects.
-   * sajædæalks
    */
   getAllFromApi(choice: string): Observable<Tmodel[]> {
     console.log(this.url + '/' + choice);

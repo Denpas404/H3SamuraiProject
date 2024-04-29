@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { SamuraiErrorPipe } from './samurai-error.pipe';
+import { SamuraiErrorsPipe } from './SamuraiErrors.pipe';
 
-describe('Pipe: SamuraiErrore', () => {
+describe('Pipe: SamuraiErrorse', () => {
   it('create an instance', () => {
-    let pipe = new SamuraiErrorPipe();
+    let pipe = new SamuraiErrorsPipe();
     expect(pipe).toBeTruthy();
   });
 });
