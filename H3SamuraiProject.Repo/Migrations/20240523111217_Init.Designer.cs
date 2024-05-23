@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace H3SamuraiProject.Repo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240424074300_horseNot")]
-    partial class horseNot
+    [Migration("20240523111217_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,33 @@ namespace H3SamuraiProject.Repo.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clans", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClanDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClanLeaderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClanName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClanLeaderId")
+                        .IsUnique();
+
+                    b.ToTable("Clans");
+                });
 
             modelBuilder.Entity("H3SamuraiProject.Repo.Models.Horse", b =>
                 {
@@ -65,6 +92,12 @@ namespace H3SamuraiProject.Repo.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ClanId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClansId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -77,6 +110,8 @@ namespace H3SamuraiProject.Repo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClansId");
 
                     b.HasIndex("HorseId");
 
@@ -101,13 +136,38 @@ namespace H3SamuraiProject.Repo.Migrations
                         });
                 });
 
+            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clans", b =>
+                {
+                    b.HasOne("H3SamuraiProject.Repo.Models.Samurai", "ClanLeader")
+                        .WithOne("Clan")
+                        .HasForeignKey("H3SamuraiProject.Repo.Models.Clans", "ClanLeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClanLeader");
+                });
+
             modelBuilder.Entity("H3SamuraiProject.Repo.Models.Samurai", b =>
                 {
+                    b.HasOne("H3SamuraiProject.Repo.Models.Clans", null)
+                        .WithMany("Samurais")
+                        .HasForeignKey("ClansId");
+
                     b.HasOne("H3SamuraiProject.Repo.Models.Horse", "Horse")
                         .WithMany()
                         .HasForeignKey("HorseId");
 
                     b.Navigation("Horse");
+                });
+
+            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clans", b =>
+                {
+                    b.Navigation("Samurais");
+                });
+
+            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Samurai", b =>
+                {
+                    b.Navigation("Clan");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,7 +7,12 @@ namespace H3SamuraiProject.Repo.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int Age { get; set; }
-        public int? HorseId { get; set; }
-        public Horse? Horse { get; set; }
+
+        public int? HorseId { get; set; } // foreign key field
+        public Horse? Horse { get; set; } // navigation property
+
+        public int? ClanId { get; set; } // foreign key field
+        public Clans? Clan { get; set; } // navigation property
+       
     }
 }

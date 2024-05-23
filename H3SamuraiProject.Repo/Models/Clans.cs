@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace H3SamuraiProject.Repo.Models
 {
-    internal class Clans
+    public class Clans
     {
+        public int Id { get; set; }
+        public string ClanName { get; set; }
+        public string ClanDescription { get; set; }
+
+        public int ClanLeaderId { get; set; }
+        public Samurai? ClanLeader { get; set; }
+        public ICollection<Samurai>? Samurais { get; set; }  
     }
 }
