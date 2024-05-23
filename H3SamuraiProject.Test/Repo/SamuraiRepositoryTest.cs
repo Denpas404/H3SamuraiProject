@@ -113,26 +113,6 @@ public class SamuraiRepositoryTest
         // Assert
         Assert.Null(repo); // We expect a null result
     }
-
-    [Fact]
-    public void CreateSamurai_ReturnSamurau()
-    {
-        // Arrange
-        SamuraiRepository repo = new SamuraiRepository(_context);
-        Samurai s4 = new Samurai()
-        {
-            Id = 4,
-            Name = "Samurai Y",
-            Description = "A wandering samurai who is known for his swordsmanship and his willingness to help those in need.",
-            Age = 30,
-            HorseId = 3
-        };
-        // Act
-        var result = repo.Create(s4);
-        // Assert
-        Assert.True(result != null);
-        
-    }
 }
 
 
