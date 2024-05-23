@@ -11,8 +11,6 @@ namespace H3SamuraiProject.Repo.Models
         public int? HorseId { get; set; } // foreign key field
         public Horse? Horse { get; set; } // navigation property
 
-        public int? ClanId { get; set; } // foreign key field
-        public Clans? Clan { get; set; } // navigation property
        
     }
 }

@@ -27,7 +27,6 @@ public class SamuraiRepository : ISamuraiRepository
     {
         return _context.Samurais
             .Include(s => s.Horse)
-            .Include(s => s.Clan)
             .OrderBy(S => S.Name).ToList();
     }
 
