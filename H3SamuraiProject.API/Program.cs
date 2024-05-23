@@ -22,6 +22,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<ISamuraiRepository, SamuraiRepository>();
 builder.Services.AddScoped<IHorseRepository, HorseRepository>();
+builder.Services.AddScoped<IMappingService, MappingService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -6,10 +6,12 @@ namespace H3SamuraiProject.API.Controllers
     public class SamuraiController : ControllerBase
     {
         private readonly ISamuraiRepository _samuraiRepository;
+        private readonly IMappingService _mappingService;
 
-        public SamuraiController(ISamuraiRepository samuraiRepository)
+        public SamuraiController(ISamuraiRepository samuraiRepository, IMappingService mappingService)
         {
             _samuraiRepository = samuraiRepository;
+            _mappingService = mappingService;
         }
 
         [HttpPost]
@@ -33,7 +35,7 @@ namespace H3SamuraiProject.API.Controllers
                     return BadRequest("Failed to create a new samurai");
                 }
 
-                return Ok(newSamurai);
+                return Ok(_mappingService.MapSamurai(samurai));
             }
             catch (Exception ex)
             {
@@ -46,6 +48,7 @@ namespace H3SamuraiProject.API.Controllers
         {
             try
             {
+                // Get all samurais from the database
                 var samurais = _samuraiRepository.GetAllSamurais();
                 
                 if (samurais == null)
@@ -53,7 +56,17 @@ namespace H3SamuraiProject.API.Controllers
                     return NotFound("No samurais found");
                 }
 
-                return Ok(samurais);
+                // Create a list of SamuraiDTO objects
+                var returnList = new List<SamuraiDTO>();    
+
+                // Map each Samurai object to a SamuraiDTO object
+                foreach (var samurai in samurais)
+                {
+                    returnList.Add(_mappingService.MapSamurai(samurai));
+                }
+
+                // Return the list of SamuraiDTO objects
+                return Ok(returnList);
             }
             catch (Exception ex)
             {
