@@ -22,49 +22,6 @@ namespace H3SamuraiProject.Repo.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clans", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClanDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ClanLeaderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ClanName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClanLeaderId")
-                        .IsUnique();
-
-                    b.ToTable("Clans");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClanDescription = "The Shogun Clan is the most powerful clan in the land.",
-                            ClanLeaderId = 1,
-                            ClanName = "Shogun"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClanDescription = "The Ronin Clan is a group of masterless samurai.",
-                            ClanLeaderId = 2,
-                            ClanName = "Ronin"
-                        });
-                });
-
             modelBuilder.Entity("H3SamuraiProject.Repo.Models.Horse", b =>
                 {
                     b.Property<int>("Id")
@@ -91,6 +48,16 @@ namespace H3SamuraiProject.Repo.Migrations
                         {
                             Id = 2,
                             Name = "ShadowFax"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Black Beauty"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Silver"
                         });
                 });
 
@@ -101,15 +68,6 @@ namespace H3SamuraiProject.Repo.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ClanId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ClansId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -124,8 +82,6 @@ namespace H3SamuraiProject.Repo.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClansId");
-
                     b.HasIndex("HorseId");
 
                     b.ToTable("Samurais");
@@ -134,55 +90,40 @@ namespace H3SamuraiProject.Repo.Migrations
                         new
                         {
                             Id = 1,
-                            Age = 25,
-                            ClanId = 1,
-                            Description = "A samurai warrior who has been sent to the future by an evil demon named Aku.",
+                            Description = "A samurai warrior who has been sent to the future by the evil demon Aku",
                             HorseId = 1,
                             Name = "Samurai Jack"
                         },
                         new
                         {
                             Id = 2,
-                            Age = 15,
-                            ClanId = 2,
                             Description = "Just another guy with sword.",
                             HorseId = 2,
                             Name = "DarkOne"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A wandering samurai with a heart of gold and a knack for getting into trouble",
+                            HorseId = 3,
+                            Name = "Ronin Ron"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "A samurai who prefers lounging around to sword fighting, but still manages to get the job done",
+                            HorseId = 4,
+                            Name = "Lazy Blade Larry"
                         });
-                });
-
-            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clans", b =>
-                {
-                    b.HasOne("H3SamuraiProject.Repo.Models.Samurai", "ClanLeader")
-                        .WithOne("Clan")
-                        .HasForeignKey("H3SamuraiProject.Repo.Models.Clans", "ClanLeaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ClanLeader");
                 });
 
             modelBuilder.Entity("H3SamuraiProject.Repo.Models.Samurai", b =>
                 {
-                    b.HasOne("H3SamuraiProject.Repo.Models.Clans", null)
-                        .WithMany("Samurais")
-                        .HasForeignKey("ClansId");
-
                     b.HasOne("H3SamuraiProject.Repo.Models.Horse", "Horse")
                         .WithMany()
                         .HasForeignKey("HorseId");
 
                     b.Navigation("Horse");
-                });
-
-            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clans", b =>
-                {
-                    b.Navigation("Samurais");
-                });
-
-            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Samurai", b =>
-                {
-                    b.Navigation("Clan");
                 });
 #pragma warning restore 612, 618
         }

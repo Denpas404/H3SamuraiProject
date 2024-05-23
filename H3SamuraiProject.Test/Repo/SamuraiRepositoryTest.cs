@@ -37,24 +37,21 @@ public class SamuraiRepositoryTest
         // Samurais
         Samurai s1 = new Samurai() { 
             Id = 1, Name = "Samurai Jack", 
-            Description = "A samurai warrior who has been sent to the future by an evil demon named Aku.", 
-            Age = 25, 
+            Description = "A samurai warrior who has been sent to the future by an evil demon named Aku.",             
             HorseId = 1 };
 
         Samurai s2 = new Samurai()
         {
             Id = 2,
             Name = "DarkOne",
-            Description = "Just another guy with sword.",
-            Age = 15,
+            Description = "Just another guy with sword.",            
             HorseId = 2 };
 
         Samurai s3 = new Samurai()
         {
             Id = 3, 
             Name = "Samurai X", 
-            Description = "A wandering samurai who is known for his swordsmanship and his willingness to help those in need.", 
-            Age = 30, 
+            Description = "A wandering samurai who is known for his swordsmanship and his willingness to help those in need.",             
             HorseId = 3 };
         
         _context.Add(s1);
