@@ -6,5 +6,7 @@ public class Clan
     public int Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public ICollection<Samurai> Samurais { get; set; }
+    public string ClanLeaderId { get; set; } // foreign key field to Samurai
+    public Samurai ClanLeader { get; set; } // navigation property
+    public ICollection<Samurai> Samurais { get; set; } // navigation property
 }
