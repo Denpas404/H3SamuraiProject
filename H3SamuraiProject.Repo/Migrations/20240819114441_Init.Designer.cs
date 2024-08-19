@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace H3SamuraiProject.Repo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240523111217_Init")]
+    [Migration("20240819114441_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace H3SamuraiProject.Repo.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clans", b =>
+            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Battles", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,23 +33,63 @@ namespace H3SamuraiProject.Repo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ClanDescription")
-                        .IsRequired()
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ClanLeaderId")
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Battles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "The ultimate showdown in 1600 where samurais settled who was the top dog of the era, and it wasn't just a clash of swords—it was the medieval version of a big, dramatic TV finale.",
+                            Name = "Battle of Sekigahara"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "The 1575 face-off where gunpowder made its grand entrance, and Takeda’s cavalry learned the hard way that 'what goes around comes around'—usually in the form of bullets.",
+                            Name = "Battle of Nagashino"
+                        });
+                });
+
+            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClanName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ClanLeaderId")
-                        .IsUnique();
-
                     b.ToTable("Clans");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClanName = "Future Warriors",
+                            Description = "A clan of elite samurais sent from the past to protect the future, renowned for their honor and combat skills."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClanName = "Shadow Blades",
+                            Description = "A mysterious clan shrouded in secrecy, known for their stealth and formidable swordsmanship."
+                        });
                 });
 
             modelBuilder.Entity("H3SamuraiProject.Repo.Models.Horse", b =>
@@ -59,6 +99,9 @@ namespace H3SamuraiProject.Repo.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -72,11 +115,13 @@ namespace H3SamuraiProject.Repo.Migrations
                         new
                         {
                             Id = 1,
+                            Description = "A blazing-fast horse with a mane as fiery as his name.",
                             Name = "Red Hare"
                         },
                         new
                         {
                             Id = 2,
+                            Description = "A majestic and mysterious steed with an air of elegance.",
                             Name = "ShadowFax"
                         });
                 });
@@ -95,11 +140,7 @@ namespace H3SamuraiProject.Repo.Migrations
                     b.Property<int?>("ClanId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClansId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("HorseId")
@@ -111,7 +152,7 @@ namespace H3SamuraiProject.Repo.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClansId");
+                    b.HasIndex("ClanId");
 
                     b.HasIndex("HorseId");
 
@@ -122,6 +163,7 @@ namespace H3SamuraiProject.Repo.Migrations
                         {
                             Id = 1,
                             Age = 25,
+                            ClanId = 1,
                             Description = "A samurai warrior who has been sent to the future by an evil demon named Aku.",
                             HorseId = 1,
                             Name = "Samurai Jack"
@@ -130,44 +172,83 @@ namespace H3SamuraiProject.Repo.Migrations
                         {
                             Id = 2,
                             Age = 15,
+                            ClanId = 2,
                             Description = "Just another guy with sword.",
                             HorseId = 2,
                             Name = "DarkOne"
                         });
                 });
 
-            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clans", b =>
+            modelBuilder.Entity("H3SamuraiProject.Repo.Models.SamuraiBattles", b =>
                 {
-                    b.HasOne("H3SamuraiProject.Repo.Models.Samurai", "ClanLeader")
-                        .WithOne("Clan")
-                        .HasForeignKey("H3SamuraiProject.Repo.Models.Clans", "ClanLeaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("ClanLeader");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BattleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SamuraiId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BattleId");
+
+                    b.HasIndex("SamuraiId");
+
+                    b.ToTable("SamuraiBattles");
                 });
 
             modelBuilder.Entity("H3SamuraiProject.Repo.Models.Samurai", b =>
                 {
-                    b.HasOne("H3SamuraiProject.Repo.Models.Clans", null)
+                    b.HasOne("H3SamuraiProject.Repo.Models.Clan", "Clan")
                         .WithMany("Samurais")
-                        .HasForeignKey("ClansId");
+                        .HasForeignKey("ClanId");
 
                     b.HasOne("H3SamuraiProject.Repo.Models.Horse", "Horse")
                         .WithMany()
                         .HasForeignKey("HorseId");
 
+                    b.Navigation("Clan");
+
                     b.Navigation("Horse");
                 });
 
-            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clans", b =>
+            modelBuilder.Entity("H3SamuraiProject.Repo.Models.SamuraiBattles", b =>
+                {
+                    b.HasOne("H3SamuraiProject.Repo.Models.Battles", "Battle")
+                        .WithMany("SamuraiBattles")
+                        .HasForeignKey("BattleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("H3SamuraiProject.Repo.Models.Samurai", "Samurai")
+                        .WithMany("SamuraiBattles")
+                        .HasForeignKey("SamuraiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Battle");
+
+                    b.Navigation("Samurai");
+                });
+
+            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Battles", b =>
+                {
+                    b.Navigation("SamuraiBattles");
+                });
+
+            modelBuilder.Entity("H3SamuraiProject.Repo.Models.Clan", b =>
                 {
                     b.Navigation("Samurais");
                 });
 
             modelBuilder.Entity("H3SamuraiProject.Repo.Models.Samurai", b =>
                 {
-                    b.Navigation("Clan");
+                    b.Navigation("SamuraiBattles");
                 });
 #pragma warning restore 612, 618
         }
