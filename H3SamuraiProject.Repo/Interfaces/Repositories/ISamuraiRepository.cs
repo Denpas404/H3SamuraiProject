@@ -1,6 +1,4 @@
-﻿
-
-namespace H3SamuraiProject.Repo.Interfaces;
+﻿namespace H3SamuraiProject.Repo.Interfaces.Repositories;
 
 public interface ISamuraiRepository
 {

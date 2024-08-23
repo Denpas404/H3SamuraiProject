@@ -1,4 +1,6 @@
 ﻿
+using H3SamuraiProject.Repo.Interfaces.Repositories;
+
 namespace H3SamuraiProject.Repo.Repositories;
 
 public class HorseRepository : IHorseRepository

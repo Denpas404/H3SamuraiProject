@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Interfaces\Controllers\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

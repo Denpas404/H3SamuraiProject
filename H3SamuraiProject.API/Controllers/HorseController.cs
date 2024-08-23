@@ -1,5 +1,7 @@
 ﻿
 
+using H3SamuraiProject.Repo.Interfaces.Repositories;
+
 namespace H3SamuraiProject.API.Controllers
 {
     [ApiController]
